@@ -1,6 +1,7 @@
 package com.testproject.vkinfo;
 
 import static com.testproject.vkinfo.utils.NetworkUtils.generateURL;
+import static com.testproject.vkinfo.utils.NetworkUtils.getResponseFromURL;
 //import static com.testproject.vkinfo.utils.NetworkUtils;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -31,17 +33,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 URL generatedURL;
+                String response = null;
                 try {
                     generatedURL = generateURL(searchField.getText().toString());
+                    response = getResponseFromURL(generatedURL);
                     result.setText(generatedURL.toString());
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-
-
-
+                result.setText(response);
             }
-
         };
         searchButton.setOnClickListener(onClickListener);
     }
