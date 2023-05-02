@@ -69,15 +69,21 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("response");
-                    JSONObject userInfo = jsonArray.getJSONObject(0);
+//                    JSONObject userInfo = jsonArray.getJSONObject(0);
+                    String resultingString = "";
+                    for(int i = 0; i < jsonArray.length(); i++){
+                        JSONObject userInfo = jsonArray.getJSONObject(i);
 
-                    firstName = userInfo.getString("first_name");
-                    lastName = userInfo.getString("last_name");
+                        firstName = userInfo.getString("first_name");
+                        lastName = userInfo.getString("last_name");
+                        resultingString += "Имя: " + firstName + "\n" + "Фамилия: " + lastName + "\n\n";
+                    }
+                    result.setText(resultingString);
+
+
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-                String resultingString = "Имя: " + firstName + "\n" + "Фамилия: " + lastName;
-                result.setText(resultingString);
                 showResultTextView();
             } else {
                 showErrorTextView();

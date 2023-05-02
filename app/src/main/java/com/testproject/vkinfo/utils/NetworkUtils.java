@@ -20,10 +20,10 @@ public class NetworkUtils {
     private static final String ACCESS_TOKEN = "access_token";
 
 
-    public static URL generateURL(String userID) throws MalformedURLException {
+    public static URL generateURL(String userIDs) throws MalformedURLException {
 
 
-        Uri builtUri = Uri.parse(VK_API_BASE_URL + VK_USERS_GET).buildUpon().appendQueryParameter(PARAM_USER_ID, userID)
+        Uri builtUri = Uri.parse(VK_API_BASE_URL + VK_USERS_GET).buildUpon().appendQueryParameter(PARAM_USER_ID, userIDs)
                 .appendQueryParameter(PARAM_VERSION, "5.89")
                 .appendQueryParameter(ACCESS_TOKEN, "9816b4849816b4849816b4845a9b056201998169816b484fc5956dc6555259d20f3f12e")
                 .build();
